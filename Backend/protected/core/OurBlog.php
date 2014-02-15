@@ -41,7 +41,11 @@ class OurBlog
         return self::$ourInstance;
     }
 
-    /* index.php 里运行的开始*/
+    /* index.php 里运行的开始
+     *==>返回DB类实例，检查登陆，处理请求，日志记录<==
+     *
+     *
+     * */
     public function run()
     {
         ob_start(); //打开输出缓冲区
@@ -59,7 +63,7 @@ class OurBlog
                 $this->show_404();
             }
         }
-        catch(OurException $e)
+        catch(OurException $e)//如果没有catch到自定义异常，那么就用内置异常类处理
         {
             $this->errorHandler($e);
         }
@@ -79,7 +83,10 @@ class OurBlog
         exit;
     }
     
-    /*处理请求的页面*/
+    /*处理请求的页面
+     *==>就是实例化给定的类，然后调用方法，同时给出参数<==
+     *
+     * */
     private function handleRequest($className)
     {
         $this->loadClass(APP_PATH. '/controllers/'. $className. '.php');//include the file
@@ -88,6 +95,7 @@ class OurBlog
         call_user_func_array(array($class, $method), $this->params['params']);
     }
 
+    /*调用参数中给定的地址的类文件*/
     public function loadClass($classLocation)
     {
         if(file_exists($classLocation))
@@ -96,6 +104,7 @@ class OurBlog
             throw new OurException('class Not Found', 0);
     }
 
+    /*发送一个错误请求的头文件，然后打印错误*/
     public function errorHandler($e)
     {
         ob_clean();//清除缓冲区的内容，也就是只有单独的错误页面
@@ -104,7 +113,7 @@ class OurBlog
                 '400'  => 'HTTP/1.1 400 Bad Request'
         );
 
-        if(get_class($e) === 'OurException')
+        if(get_class($e) === 'OurException')//如果是自定义的异常
         {
             $n = $e->code;
 
@@ -116,12 +125,15 @@ class OurBlog
                 case 404:
                     header($http['404'], true, '404');
                     break;
+                case 400:
+                    header($http['400'], true, '400');
+                    break;
                 default:
                     header($http['404'], true, '404');
                     break;
             }
 
-            echo $e->message;//???getMessage()
+            echo $e->message;
         }
         else
         {

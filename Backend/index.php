@@ -21,4 +21,4 @@ define('DOMAIN_URL', $domain);
 
 require_once CORE_PATH.'/OurBlog.php';
 
-
+OurBlog::getInstance()->run();
