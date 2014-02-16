@@ -47,3 +47,26 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+a {
+    color: #555;
+    text-decoration: none;
+    transition: 0.3s;
+    -o-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -webkit-transition: 0.3s;
+}
+a:hover {
+    transition: 0.3s;
+    -o-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -webkit-transition: 0.3s;
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+}
