@@ -120,8 +120,8 @@ body {
 #iBody .articleBlock .text {
     width: 685px;
     margin-left: 75px;
-    padding: 0 20px 30px 20px;
-    background: #fff;
+    padding: 30px 20px 30px 20px;
+    background: #fff url("../img/articleTop.png") center 13px no-repeat;
 }
 
 #iBody .articleBlock .text:before {
