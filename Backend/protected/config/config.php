@@ -7,7 +7,7 @@ return array(
     'hostname' => 'localhost',
     'username' => 'root',
     'password' => 'fuckyou',
-    'database' => 'ourblog'
+    'database' => 'ourblog',
 
     //pagination 
     'pagination' => 2

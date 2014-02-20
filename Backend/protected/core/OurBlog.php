@@ -5,7 +5,7 @@ require_once(CORE_PATH. '/utils/DB.php');
 require_once(CORE_PATH. '/ourController.php');
 require_once(CORE_PATH. '/ourModel.php');
 require_once(CORE_PATH. '/ourException.php');
-require_once(CORE_PATH. '/LogModel.php');  //???
+require_once(CORE_PATH. '/LogModel.php');  //???这里可以在common.php里弄一个load_class()
 
 
 class OurBlog
@@ -19,9 +19,9 @@ class OurBlog
 
     private function __construct()
     {
-        $requestURI = $_SERVER['REQUEST_URI']; //REQUEST_URI是要访问的
-        $parser     = new URLParser($requestURI);//???
-        $this->config = include(CONFIG_PATH.'/config.php');// an array
+        $requestURI = $_SERVER['REQUEST_URI'];              //REQUEST_URI是要访问的
+        $parser     = new URLParser($requestURI);           //parse uri
+        $this->config = include(CONFIG_PATH.'/config.php'); //return the array of the config
         $this->params = $parser->parse($this->config);
         $this->isAjaxRequest = call_user_func(function(){
             if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpREquest')
@@ -74,15 +74,7 @@ class OurBlog
 
     }
 
-    /*404页面*/
-    public function show_404()
-    {
-        header('Status: 404 Not Found', true, '404');
-        //The 404 page 
-        echo 'Error: 404 Page Not Found';
-        exit;
-    }
-    
+
     /*处理请求的页面
      *==>就是实例化给定的类，然后调用方法，同时给出参数<==
      *
@@ -92,8 +84,19 @@ class OurBlog
         $this->loadClass(APP_PATH. '/controllers/'. $className. '.php');//include the file
         $class = new $className();
         $method = $this->params['action'];
-        call_user_func_array(array($class, $method), $this->params['params']);
+        call_user_func_array(array($class, $method), $this->params['params']);//array的第一个参数是类的实例，第二个参数就是类的方法
     }
+
+
+    /*404页面*/
+    public function show_404()
+    {
+        header('Status: 404 Not Found', true, '404');
+        //The 404 page 
+        echo 'Error: 404 Page Not Found';
+        exit;
+    }
+    
 
     /*调用参数中给定的地址的类文件*/
     public function loadClass($classLocation)
