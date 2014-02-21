@@ -7,9 +7,9 @@ class OurException extends Exception
 
     public function __construct($errorMsg = ' ', $errorCode = 0)
     {
+        parent::__construct($errorMsg, $errorCode);
         $this->message = $errorMsg;
         $this->code    = $errorCode;
-        parent::__construct($errorMsg, $errorCode);
     }
 
     public function __toString()

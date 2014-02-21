@@ -7,7 +7,7 @@ class OurController
     public function __construct()
     {
         $this->APP = OurBlog::getInstance();
-        $this-db   = $this->APP->db;//返回数据库的实例
+        $this->db   = $this->APP->db;//返回数据库的实例
     }
 
     //render the view
@@ -27,6 +27,7 @@ class OurController
         }
     } 
 
+    /*在单例中加载模型类*/
     public function loadModel($modelName)
     {
         $modelName = ucfirst($modelName);
@@ -42,6 +43,7 @@ class OurController
         }
     }
 
+    /*在单例中加载扩展类 */
     public function loadLibrary($libName)
     {
         $libName = ucfirst($libName);

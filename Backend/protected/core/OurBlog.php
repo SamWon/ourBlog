@@ -42,7 +42,7 @@ class OurBlog
     }
 
     /* index.php 里运行的开始
-     *==>返回DB类实例，检查登陆，处理请求，日志记录<==
+     *==>connect数据库，检查登陆，处理请求，日志记录<==
      *
      *
      * */
@@ -51,9 +51,9 @@ class OurBlog
         ob_start(); //打开输出缓冲区
         try
         {
-            $this->db = DB::getInstance->getDb();
+            DB::getInstance->connectDB();//Connect to  the database
             $this->isAdmin = $this->loginCheck();
-            if($this->params['illegal'] == false) 
+            if($this->params['illegal'] !== false) 
             {
                 $this->handleRequest($this->params['className']);
                 $this->log("request class {$this->params['className']} with the action {$this->params['action']}", 'log');
