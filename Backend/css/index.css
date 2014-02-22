@@ -1,0 +1,209 @@
+/* index */
+body {
+    margin-top: -4px;
+    background: url("../img/bdbg.png");
+}
+
+#iWrap {
+    position: relative;
+    background: black;
+}
+
+#iWrap .wrapBg {
+    opacity: 0.55;
+    filter: alpha(opacity = 55);
+}
+
+#iWrap .wrapTit, #iWrap .wrapFoot {
+    position: absolute;
+}
+
+#iWrap .headImg {
+    width: 180px;
+    height: 180px;
+    border-radius: 90px;
+}
+
+#iWrap .userName {
+    text-align: center;
+    font-size: 50px;
+}
+
+#iWrap .titColor {
+    color: #ccc;
+}
+
+#iWrap .wrapFoot {
+    width: 100%;
+    height: 95px;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#iWrap .footTit {
+    width: 250px;
+    line-height: 50px;
+    margin: 0 auto;
+    margin-top: 20px;
+    cursor: pointer;
+    background: url("../img/ibg.png") 202px 7px no-repeat;
+}
+
+#iWrap .footTit:hover {
+    color: #fff;
+    background: url("../img/ibg.png") 202px -60px no-repeat;
+}
+
+#iBody {
+    display: none;
+    margin-top: -18px;
+    padding-bottom: 40px;
+}
+
+#iBody .mainTit {
+    width: 100%;
+    height: 110px;
+    padding-top: 40px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: #fff;
+    background: #000;
+    opacity: .5;
+    filter: alpha(opacity = 50);
+}
+
+#iBody .mainTit .subTit {
+    font-size: 13px;
+}
+
+#iBody .main {
+    width: 960px;
+    margin: 0 auto;
+}
+
+#iBody .content {
+    width: 800px;
+    float: left;
+}
+
+#iBody .articleBlock {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* time */
+#iBody .time {
+    width: 60px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    text-align: center;
+    opacity: .4;
+    filter: alpha(opacity = 40);
+}
+
+#iBody .time .month, #iBody .time .year {
+    line-height: 23px;
+    border-style: solid;
+    border-width: 1px 0;
+    border-color: #fff;
+    font-size: 17px;
+}
+
+#iBody .time .day {
+    line-height: 60px;
+    font-size: 50px;
+}
+/* END time */
+
+#iBody .articleBlock .text {
+    width: 685px;
+    margin-left: 75px;
+    padding: 30px 20px 30px 20px;
+    background: #fff url("../img/articleTop.png") center 13px no-repeat;
+}
+
+#iBody .articleBlock .text:before {
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+#iBody .articleBlock .textTit {
+    margin-bottom: 15px;
+}
+
+#iBody .articleBlock .textTit a:hover {
+    color: #000;
+}
+
+#iBody .articleBlock .textKind {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #777;
+}
+
+#iBody .articleBlock img {
+    max-width: 685px;
+}
+
+#iBody .aside {
+    width: 140px;
+    margin-left: 20px;
+    float: left;
+}
+
+#iBody #coffee {
+    margin-left: 15px;
+    position: relative;
+    z-index: 10;
+}
+
+#iBody .aside #coffee img {
+    width: 140px;
+    height: 85px;
+}
+
+#iBody .kind {
+    text-align: center;
+    color: #fff;
+}
+
+#iBody .kind h3 {
+    font-size: 18px;
+}
+
+#iBody .kind li {
+    margin-bottom: 10px;
+    border-left: 3px solid #777;
+}
+
+#iBody .kind li:hover {
+    border-left-color: #fff;
+}
+
+#iBody .kind a {
+    color: #777;
+}
+
+#iBody .kind li:hover a {
+    color: #fff;
+}
+
+#iBody .goto {
+    display: none;
+    width: 41px;
+    height: 41px;
+    position: fixed;
+    right: 50px;
+    bottom: 70px;
+    background: url("../img/ibg.png") -90px -63px no-repeat;
+    cursor: pointer;
+}
+
+#iBody .goto:hover {
+    background: url("../img/ibg.png") -90px 2px no-repeat;
+}
+/* END index */
