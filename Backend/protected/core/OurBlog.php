@@ -16,6 +16,7 @@ class OurBlog
     public  $db              ;
     public  $isAjaxRequest = false;
     public  $isAdmin= false;
+    public  $conn;
 
     private function __construct()
     {
@@ -51,7 +52,7 @@ class OurBlog
         ob_start(); //打开输出缓冲区
         try
         {
-            DB::getInstance->connectDB();//Connect to  the database
+            $this->db = DB::getInstance->connectDB();//Connect to  the database
             $this->isAdmin = $this->loginCheck();
             if($this->params['illegal'] !== false) 
             {
@@ -81,7 +82,8 @@ class OurBlog
      * */
     private function handleRequest($className)
     {
-        $this->loadClass(APP_PATH. '/controllers/'. $className. '.php');//include the file
+        $tempClassName = ucfirst($className);
+        $this->loadClass(APP_PATH. '/controllers/'. $tempClassName. 'Controller.php');//include the file
         $class = new $className();
         $method = $this->params['action'];
         call_user_func_array(array($class, $method), $this->params['params']);//array的第一个参数是类的实例，第二个参数就是类的方法

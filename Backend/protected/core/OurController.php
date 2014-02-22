@@ -12,7 +12,7 @@ class OurController
 
     //render the view
     //实际上也就是检查路径对不对，然后extract数组，包含view文件
-    public function render($viewName, $dataArray = array())
+    public function loadView($viewName, $dataArray = array())
     {
         $viewPath = APP_PATH. '/views/' .$viewName. '.php';
 
@@ -33,7 +33,7 @@ class OurController
         $modelName = ucfirst($modelName);
         $modelPath = APP_PATH . '/models/' . $modelName .'Model.php';
 
-        if(empty($modelName)) || !file_exists($modelPath)
+        if(empty($modelName) || !file_exists($modelPath))
         {
             exit('Model File not found.') ;//???
         }

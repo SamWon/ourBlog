@@ -5,7 +5,6 @@ class DB
     
     /*这个类主要负责连接数据库*/
     private static $instance;
-    private $conn;
     private $db;
     private $hostname;
     private $username;
@@ -26,10 +25,18 @@ class DB
     /*连接数据库*/
     public function connectDB()
     {
-        $this->conn = mysql_connect($this->hostname, $this->username, $this->password) or die("DB connection error".mysql_error());
-        mysql_select_db($this->database, $this->conn) or die("Cannot choose the database");
+        $this->db = new mysqli($this->hostname, $this->username, $this->password, $this->database);
+        if($this->db->connect_errno)
+            die("Connect failed: ". $this->db->connect_error);
+        return $this->db;
     }
 
+    /* 关闭数据库连接 */ 
+    public function closeDB()
+    {
+        $this->db->close();
+    }
+    
     /*返回类的实例 */
     public static function getInstance()
     {
@@ -37,12 +44,6 @@ class DB
             $this->instance = new DB();
         return $this->instance;
         //return self::$instance;
-    }
-    
-    /* 关闭数据库连接 */ 
-    public function closeDB()
-    {
-        mysql_close($this->conn);
     }
     
 }
