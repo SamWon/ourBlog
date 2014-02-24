@@ -27,7 +27,7 @@ class DB
     {
         $this->db = new mysqli($this->hostname, $this->username, $this->password, $this->database);
         if($this->db->connect_errno)
-            die("Connect failed: ". $this->db->connect_error);
+            die("Connected failed: ". $this->db->connect_error);
         return $this->db;
     }
 
@@ -40,10 +40,9 @@ class DB
     /*返回类的实例 */
     public static function getInstance()
     {
-        if(empty($this->instance))
-            $this->instance = new DB();
-        return $this->instance;
-        //return self::$instance;
+        if(empty(self::$instance))
+            self::$instance = new DB();
+        return self::$instance;
     }
     
 }

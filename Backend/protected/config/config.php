@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'defaultController' => 'Home',
+    'defaultController' => 'home',
     
     //databaseConfiguration 
     'hostname' => 'localhost',

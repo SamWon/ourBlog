@@ -16,7 +16,7 @@ class URLParser
         $this->uri = $parsed_uri;
     }
 
-    public function parser( $config )
+    public function parse( $config )
     {
         //将uri中的class & method 抽丝剥茧出来
         $apart = '/';
@@ -25,7 +25,8 @@ class URLParser
                            ? ucfirst($config['defaultController']) . 'Controller'
                            : ucfirst($this->className) . 'Controller';
         $this->illegal   = (preg_match('/^[\w_-]+$/' , $this->className )) ? true : false ; //???
-        $this->action    = strtolower( strtok($apart) );
+        $temp = (strtolower( strtok($apart) ));
+        $this->action    = $temp ? $temp : "index";
 
         $paramArray      = array();
         //通过while将本是“路径”的参数抽出来

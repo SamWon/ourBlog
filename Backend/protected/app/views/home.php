@@ -3,15 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <title>our blog</title>
-        <link rel="stylesheet" href="../css/reset.css" />
-        <link rel="stylesheet" href="../css/index.css" />
+        <link rel="stylesheet" href="/css/reset.css" />
+        <link rel="stylesheet" href="/css/index.css" />
     </head>
     <body>
         <div id="iWrap">
-            <img src="../img/bg.jpg" alt="" class="wrapBg" />
+            <img src="/img/bg.jpg" alt="" class="wrapBg" />
 
             <div class="wrapTit">
-                <img src="../img/cat.jpg" alt="我的头像" class="headImg" />
+                <img src="/img/cat.jpg" alt="我的头像" class="headImg" />
 
                 <h1 class="userName titColor">Kirsten</h1>
             </div>
@@ -44,7 +44,7 @@
 
                             <div class="textContent">
                                 ahdsakjdaskdsahdkjashdsakjdhsakdjasdjkaslhdasksahkjdhaskd
-                                <img src="../img/bg.jpg" alt="" />
+                                <img src="/img/bg.jpg" alt="" />
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
 
                             <div class="textContent">
                                 ahdsakjdaskdsahdkjashdsakjdhsakdjasdjkaslhdasksahkjdhaskd
-                                <img src="../img/bg.jpg" alt="" />
+                                <img src="/img/bg.jpg" alt="" />
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
 
                 <div class="aside">
                     <div id="coffee">
-                        <img src="../img/coffee.png" alt="" />
+                        <img src="/img/coffee.png" alt="" />
                     </div>
 
                     <div class="kind">
@@ -93,13 +93,13 @@
         </div>
         <!-- END iBody -->
     </body>
-    <script type="text/javascript" src="../js/jquery.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
-    <script type="text/javascript" src="../js/jquery.coffee.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/jquery.coffee.js"></script>
     <script type="text/javascript">
         $(function() {
             $("#coffee").coffee({
-                steams: ["Sam", "小复杂", "基佬"],//自定义飘动字
+                steams: ["Sam", "小复杂", "基佬","A","B","C"],//自定义飘动字
                 steamFlyTime: 1000,//飞行时间
                 makeSteamInterval: 1000,//制造间隔
 		        steamMaxSize: 16,//最大字体

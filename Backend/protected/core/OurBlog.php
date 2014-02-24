@@ -5,14 +5,14 @@ require_once(CORE_PATH. '/utils/DB.php');
 require_once(CORE_PATH. '/ourController.php');
 require_once(CORE_PATH. '/ourModel.php');
 require_once(CORE_PATH. '/ourException.php');
-require_once(CORE_PATH. '/LogModel.php');  //???这里可以在common.php里弄一个load_class()
+//require_once(CORE_PATH. '/LogModel.php');  //???这里可以在common.php里弄一个load_class()
 
 
 class OurBlog
 {
     private static $ourInstance;
     private $params = array();
-    private $config = array();
+    public  $config = array();
     public  $db              ;
     public  $isAjaxRequest = false;
     public  $isAdmin= false;
@@ -52,12 +52,13 @@ class OurBlog
         ob_start(); //打开输出缓冲区
         try
         {
-            $this->db = DB::getInstance->connectDB();//Connect to  the database
-            $this->isAdmin = $this->loginCheck();
+            //var_dump(get_class($this));exit;
+            //$this->db=DB::getInstance()->connectDB();//Connect to  the database
+            //$this->isAdmin = $this->loginCheck();
             if($this->params['illegal'] !== false) 
             {
                 $this->handleRequest($this->params['className']);
-                $this->log("request class {$this->params['className']} with the action {$this->params['action']}", 'log');
+                //$this->log("request class {$this->params['className']} with the action {$this->params['action']}", 'log');
             }
             else
             {
@@ -83,8 +84,8 @@ class OurBlog
     private function handleRequest($className)
     {
         $tempClassName = ucfirst($className);
-        $this->loadClass(APP_PATH. '/controllers/'. $tempClassName. 'Controller.php');//include the file
-        $class = new $className();
+        $this->loadClass(APP_PATH. '/controllers/'. $tempClassName. '.php');//include the file
+        $class = new $tempClassName();
         $method = $this->params['action'];
         call_user_func_array(array($class, $method), $this->params['params']);//array的第一个参数是类的实例，第二个参数就是类的方法
     }
@@ -150,6 +151,7 @@ class OurBlog
         exit;
     }
 
+    /*
     public function log($msg, $level)
     {
         $log = $_SERVER;
@@ -160,7 +162,8 @@ class OurBlog
         $logModel->initWithData(array(log));
         $logModel->save();
     }
-
+     */
+    /*
     private function loginCheck()
     {
         if(isset($_COOKIE['sessionid']))
@@ -185,6 +188,7 @@ class OurBlog
         }
         return false;
     }
+    */
 
     public function updateSession($user = array())
     {
