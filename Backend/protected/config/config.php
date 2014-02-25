@@ -4,7 +4,7 @@ return array(
     'defaultController' => 'home',
     
     //databaseConfiguration 
-    'hostname' => 'localhost',
+    'hostname' => '127.0.0.1',
     'username' => 'root',
     'password' => 'fuckyou',
     'database' => 'ourblog',

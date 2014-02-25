@@ -4,9 +4,10 @@ class OurController
 {
     public $APP;
     public $db ;
+    public $loaded_model = array();
     public function __construct()
     {
-        $this->APP = OurBlog::getInstance();
+        $this->APP  = OurBlog::getInstance();
         $this->db   = $this->APP->db;//返回数据库的实例
     }
 
@@ -30,8 +31,7 @@ class OurController
     /*在单例中加载模型类*/
     public function loadModel($modelName)
     {
-        $modelName = ucfirst($modelName);
-        $modelPath = APP_PATH . '/models/' . $modelName .'Model.php';
+        $modelPath = APP_PATH . '/models/' . ucfirst($modelName) .'Model.php';
 
         if(empty($modelName) || !file_exists($modelPath))
         {
@@ -40,6 +40,8 @@ class OurController
         else
         {
             include($modelPath);
+            $tmpname = ucfirst($modelName).'Model';
+            $this->loaded_model[$modelName] = new $tmpname();
         }
     }
 
@@ -112,12 +114,19 @@ class OurController
         header("Location: $url");
     }
         
-    public function requireLogin()
+    public function __get($key)
     {
-        if(! $this->APP->isAdmin)
-        {
-            throw new OurException('Authentication failure', 0);
-        }
+        //if(isset($key))
+        //{
+         //   return $key;
+        //}else{
+            return $this->loaded_model[$key]; //return  an object
+        //}
+    }
+
+    public function __set($key , $value)
+    {
+        $this->$key = $value;
     }
 
 }

@@ -5,11 +5,13 @@ class HomeController extends OurController
     public function __construct()
     {
         parent::__construct();
+        $this->loadModel('article');
     }
 
     public function index()
     {
-        $this->loadView('home');
+        $info = $this->article->get_all_article();
+        $this->loadView('home', $info);
     }
 }
 

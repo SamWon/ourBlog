@@ -35,7 +35,7 @@ class OurBlog
     }
 
     /*返回类的实例*/
-    public static function getInstance()
+    public static function &getInstance()
     {
         if(empty(self::$ourInstance)) 
             self::$ourInstance = new OurBlog();
@@ -52,8 +52,7 @@ class OurBlog
         ob_start(); //打开输出缓冲区
         try
         {
-            //var_dump(get_class($this));exit;
-            //$this->db=DB::getInstance()->connectDB();//Connect to  the database
+            $this->db=DB::getInstance()->connectDB();//Connect to  the database
             //$this->isAdmin = $this->loginCheck();
             if($this->params['illegal'] !== false) 
             {
@@ -190,28 +189,5 @@ class OurBlog
     }
     */
 
-    public function updateSession($user = array())
-    {
-        if(empty($user))
-        {
-            throw new OurException('user is empty', 0);
-        }
-        $id = $this->generateSessionId();
-        $t = time() + 3600;
-        setcookie('sessionid', $id, $t ,'/');
-        $updatedUser = $user;
-        $updatedUser['sessionid'] = $id;
-        $updatedUser['expires'] = $t;
-
-        $this->db->ouruser->update($user, $updatedUser);
-    }
-
-    public function generateSessionId()
-    {
-        $id = new MySqlId();
-        $id = $id->{'$id'};
-        $id = sha1($id);
-        return $id;
-    }
     
 }
