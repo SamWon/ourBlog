@@ -7,24 +7,9 @@
         <link rel="stylesheet" href="../css/index.css" />
     </head>
     <body>
-        <div id="iWrap">
-            <img src="../img/bg.jpg" alt="" class="wrapBg" />
-
-            <div class="wrapTit">
-                <img src="../img/cat.jpg" alt="我的头像" class="headImg" />
-
-                <h1 class="userName titColor">Kirsten</h1>
-            </div>
-
-            <div class="wrapFoot">
-                <h2 class="footTit titColor">欢迎来到我的世界</h2>
-            </div>
-        </div>
-        <!-- END iWrap -->
-
-        <div id="iBody">
+        <div id="iBody" class="detailBody">
             <div class="mainTit">
-                <a href="#"><h1 class="titText">Kirsten</h1></a>
+                <h1><a href="#">Kirsten</a></h1>
                 <p class="subTit">这里是副标题，比如什么口号一类的</p>
             </div>
 
@@ -45,6 +30,10 @@
                             <div class="textContent">
                                 ahdsakjdaskdsahdkjashdsakjdhsakdjasdjkaslhdasksahkjdhaskd
                                 <img src="../img/bg.jpg" alt="" />
+
+                                <!-- Duoshuo Comment BEGIN -->
+                                <div class="ds-thread"></div>
+                                <!-- Duoshuo Comment END -->
                             </div>
                         </div>
                     </div>
@@ -62,8 +51,6 @@
                             <p class="textKind">分类：呵呵呵呵</p>
 
                             <div class="textContent">
-                                ahdsakjdaskdsahdkjashdsakjdhsakdjasdjkaslhdasksahkjdhaskd
-                                <img src="../img/bg.jpg" alt="" />
                             </div>
                         </div>
                     </div>
@@ -74,11 +61,6 @@
                     <div id="coffee">
                         <img src="../img/coffee.png" alt="" />
                     </div>
-
-                    <form action="" method="" class="search">
-                        <input class="searchText" type="text" placeholder="搜索你想要的内容..." />
-                        <input class="searchSubmit" type="submit" value="" />
-                    </form>
 
                     <div class="kind">
                         <h3>分类列表</h3>
@@ -106,12 +88,22 @@
             $("#coffee").coffee({
                 steams: ["Sam", "小复杂", "基佬"],//自定义飘动字
                 steamFlyTime: 1000,//飞行时间
-                makeSteamInterval: 800,//制造间隔
+                makeSteamInterval: 1000,//制造间隔
 		        steamMaxSize: 16,//最大字体
 		        steamTopMax: 150,//飞行最高高度
                 coffeeHandleWidth: 60
             });
         });
     </script>
-</script>
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"fuziang"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = 'http://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
 </html>
