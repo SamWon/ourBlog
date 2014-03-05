@@ -10,6 +10,7 @@ class HomeController extends OurController
 
     public function index()
     {
+        echo BASE_PATH;exit;
         $info = $this->article->get_all_article();
         $this->loadView('home', $info);
     }

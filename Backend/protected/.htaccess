@@ -1,0 +1,3 @@
+deny from all
+
+ErrorDocument 404 lib/404.html
