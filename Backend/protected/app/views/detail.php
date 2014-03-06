@@ -7,44 +7,32 @@
         <link rel="stylesheet" href="/css/index.css" />
     </head>
     <body>
-        <div id="iWrap">
-            <img src="/img/bg.jpg" alt="" class="wrapBg" />
-
-            <div class="wrapTit">
-                <img src="/img/cat.jpg" alt="我的头像" class="headImg" />
-
-                <h1 class="userName titColor">指尖♂舞</h1>
-            </div>
-
-            <div class="wrapFoot">
-                <h2 class="footTit titColor">欢迎来到我的世界</h2>
-            </div>
-        </div>
-        <!-- END iWrap -->
-
-        <div id="iBody">
+        <div id="iBody" class="detailBody">
 <?php include($header);?>
+<?php foreach($article as $article):?><?php endforeach;?>
             <div class="main clearfix">
                 <div class="content">
-<?php foreach($articles as $a):?>
                     <div class="articleBlock">
                         <div class="time">
-                        <div class="month"><?php echo $time_array[substr($a->time,5,2)];?></div>
-                        <div class="day"><?php echo substr($a->time,8,2);?></div>
-                            <div class="year"><?php echo substr($a->time,0,4);?></div>
+                            <div class="month"><?php echo $time_array[substr($article->time,5,2)];?></div>
+                            <div class="day"><?php echo substr($article->time,8,2);?></div>
+                            <div class="year"><?php echo substr($article->time,0,4);?></div>
                         </div>
 
                         <div class="text">
-                        <h2 class="textTit"><a href="/index.php/detail/index/<?php echo $a->aid;?>"><?php echo $a->title;?></a></h2>
+                        <h2 class="textTit"><?php echo $article->title;?></h2>
 
-                        <p class="textKind">分类:<?php echo $t_array[$a->tid];?></p>
+                        <p class="textKind">分类：<?php echo $t_array[$article->tid];?></p>
 
                             <div class="textContent">
-<?php echo mb_substr($a->content,0,100,'utf-8')."......";?>
+<?php echo $article->content;?>
+                                <!-- Duoshuo Comment BEGIN -->
+                                <div class="ds-thread"></div>
+                                <!-- Duoshuo Comment END -->
                             </div>
                         </div>
                     </div>
-<?php endforeach;?>
+
                 </div>
                 <!-- END content -->
 
@@ -54,7 +42,7 @@
                     </div>
 
                     <form action="" method="" class="search">
-                        <input class="searchText" type="text" placeholder="搜索你想要的内容..." />
+                        <input class="searchText" type="text" placeholder="搜索你想要的内容." />
                         <input class="searchSubmit" type="submit" value="" />
                     </form>
 
@@ -81,7 +69,7 @@
     <script type="text/javascript">
         $(function() {
             $("#coffee").coffee({
-                steams: ["Sam", "小复杂", "基佬","A","B","C"],//自定义飘动字
+                steams: ["Sam", "小复杂", "基佬"],//自定义飘动字
                 steamFlyTime: 1000,//飞行时间
                 makeSteamInterval: 1000,//制造间隔
 		        steamMaxSize: 16,//最大字体
@@ -89,5 +77,16 @@
                 coffeeHandleWidth: 60
             });
         });
+    </script>
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"fuziang"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = 'http://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
     </script>
 </html>

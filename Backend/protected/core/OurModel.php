@@ -75,7 +75,8 @@ class OurModel
         else
             die("Params error.");
 
-        return $this->db->query($sql);
+        $result = $this->db->query($sql);
+        return $this->make_result($result);
     }
 
     public function get_where($table_name, $info = array() ,$offset="" , $lines="")
@@ -88,12 +89,13 @@ class OurModel
 
         if($offset && $lines)
             $sql = "select * from {$table_name} limit {$offset},{$lines} where {$field}={$value}";
-        elseif($offset ==null && $lines == null)
+        elseif($offset =="" && $lines == "")
             $sql = "select * from {$table_name} where {$field}={$value}";
         else
             die("Params error.");
 
-        return $this->db->query($sql);
+        $result = $this->db->query($sql);
+        return $this->make_result($result);
     }
 
     /*更新数据*/
@@ -116,5 +118,13 @@ class OurModel
 
         $sql = "update {$table_name} set {$data_str} where {$info_f}={$info_v}";
         return $this->db->query($sql);
+    }
+
+    /*工具函数：生成结果数组*/
+    public function make_result($result)
+    {
+        while($row = $result->fetch_object())                
+            $data_array[] = $row;
+        return $data_array;
     }
 }

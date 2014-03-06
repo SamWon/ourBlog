@@ -66,10 +66,14 @@ body {
     padding-top: 40px;
     margin-bottom: 50px;
     text-align: center;
-    color: #fff;
     background: #000;
+    color: #fff;
     opacity: .5;
     filter: alpha(opacity = 50);
+}
+
+#iBody .mainTit .titText {
+    color: #fff;
 }
 
 #iBody .mainTit .subTit {
@@ -206,4 +210,42 @@ body {
 #iBody .goto:hover {
     background: url("../img/ibg.png") -90px 2px no-repeat;
 }
+
+#iBody .search {
+    position: relative;
+}
+
+#iBody .search .searchText {
+    width: 120px;
+    height: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+    background: none;
+    border: 0;
+    border-bottom: 2px dashed #777;
+    color: #fff;
+    outline: none;
+}
+
+#iBody .search .searchSubmit {
+    width: 12px;
+    height: 20px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border: 0;
+    background: url("../img/search-bg.png") no-repeat;
+    cursor: pointer;
+}
 /* END index */
+
+/* detail */
+.ds-thread {
+    padding-top: 30px;
+}
+
+#iBody.detailBody {
+    display: block;
+}
+/* END detail */

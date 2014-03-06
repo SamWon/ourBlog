@@ -10,14 +10,23 @@ class ArticleModel extends OurModel
 
     public function get_all_article()
     {
-         $result = $this->get($this->_tablename);
-         return $result->fetch_assoc();
+         return $this->get($this->_tablename);
     }
 
-    public function get_by_type($typenum)
+    public function get_by_type($type_id)
     {
-        $info = array('tid' => $typenum);
-        $result =  $this->get_where($this->_tablename, $info );
-        return $result->fetch_assoc();
+        if(!is_integer($type_id))
+            $type_id = (int)$type_id;
+        $info = array('tid' => $type_id);
+        return $this->get_where($this->_tablename, $info );
     }
+
+    public function get_by_id($aid)
+    {
+        if(!is_integer($aid))
+            $aid = (int)$aid;
+        $info = array('aid' => $aid);
+        return $this->get_where($this->_tablename, $info);
+    }
+
 }

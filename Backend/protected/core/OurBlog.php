@@ -11,6 +11,7 @@ require_once(CORE_PATH. '/ourException.php');
 class OurBlog
 {
     private static $ourInstance;
+    private static  $loaded = array();
     private $params = array();
     public  $config = array();
     public  $db              ;
@@ -38,8 +39,14 @@ class OurBlog
     public static function &getInstance()
     {
         if(empty(self::$ourInstance)) 
+        {
             self::$ourInstance = new OurBlog();
-        return self::$ourInstance;
+            self::$loaded[] = self::$ourInstance;
+            return self::$ourInstance;
+        }elseif(in_array(self::$ourInstance,self::$loaded))
+        {
+            return self::$ourInstance;
+        }
     }
 
     /* index.php 里运行的开始

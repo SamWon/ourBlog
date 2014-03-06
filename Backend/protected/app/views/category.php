@@ -7,40 +7,25 @@
         <link rel="stylesheet" href="/css/index.css" />
     </head>
     <body>
-        <div id="iWrap">
-            <img src="/img/bg.jpg" alt="" class="wrapBg" />
-
-            <div class="wrapTit">
-                <img src="/img/cat.jpg" alt="我的头像" class="headImg" />
-
-                <h1 class="userName titColor">指尖♂舞</h1>
-            </div>
-
-            <div class="wrapFoot">
-                <h2 class="footTit titColor">欢迎来到我的世界</h2>
-            </div>
-        </div>
-        <!-- END iWrap -->
-
-        <div id="iBody">
+        <div id="iBody" class="detailBody">
 <?php include($header);?>
             <div class="main clearfix">
                 <div class="content">
 <?php foreach($articles as $a):?>
                     <div class="articleBlock">
                         <div class="time">
-                        <div class="month"><?php echo $time_array[substr($a->time,5,2)];?></div>
-                        <div class="day"><?php echo substr($a->time,8,2);?></div>
+                            <div class="month"><?php echo $time_array[substr($a->time,5,2)];?></div>
+                            <div class="day"><?php echo substr($a->time,8,2);?></div>
                             <div class="year"><?php echo substr($a->time,0,4);?></div>
                         </div>
 
                         <div class="text">
-                        <h2 class="textTit"><a href="/index.php/detail/index/<?php echo $a->aid;?>"><?php echo $a->title;?></a></h2>
+                        <h2 class="textTit"><a href="#"><?php echo $a->title;?></a></h2>
 
                         <p class="textKind">分类:<?php echo $t_array[$a->tid];?></p>
 
                             <div class="textContent">
-<?php echo mb_substr($a->content,0,100,'utf-8')."......";?>
+<?php echo $a->content;?>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-<?php defined("BASE_PATH") or exit(Access Denied);
+<?php defined("BASE_PATH") or exit("Access Denied");
 
 class TypeModel extends OurModel
 {
@@ -8,9 +8,21 @@ class TypeModel extends OurModel
         parent::__construct();
     }
 
+    //取得所有的分类
     public function  get_all_type()
     {
-        $result = $this->get($this->_tablename);
-        return $result->fetch_assoc();
+        return $this->get($this->_tablename);
+    }
+
+    public function get_type_array()
+    {
+        $tmp = $this->get_all_type();
+        $array = array();
+        //var_dump($tmp);exit;
+        foreach($tmp as $arr)
+        {
+            $array[$arr->tid] = $arr->name;
+        }
+        return $array;
     }
 }

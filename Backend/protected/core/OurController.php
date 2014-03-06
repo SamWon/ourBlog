@@ -5,8 +5,12 @@ class OurController
     public $APP;
     public $db ;
     public $loaded_model = array();
+    public $data;
     public function __construct()
     {
+        $this->data = array();//用于存放向view传递的数据
+        $this->data['header'] = APP_PATH."/views/template/header.php";  
+        $this->data['footer'] = APP_PATH."/views/template/footer.php";
         $this->APP  = OurBlog::getInstance();
         $this->db   = $this->APP->db;//返回数据库的实例
     }
@@ -114,6 +118,7 @@ class OurController
         header("Location: $url");
     }
         
+    /*专门用来存储$this->xxxx这种实例的*/
     public function __get($key)
     {
         //if(isset($key))

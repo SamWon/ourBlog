@@ -29,11 +29,13 @@ class URLParser
         $this->action    = $temp ? $temp : "index";
 
         $paramArray      = array();
+        
         //通过while将本是“路径”的参数抽出来
-        while( $tmp = strtok($apart) != false)
+        while( ($tmp = strtok($apart)) != "")
         {
             $paramArray[] = $tmp;
         }
+        $this->params = $paramArray;
 
         return array (
             'uri' => $this->uri,
