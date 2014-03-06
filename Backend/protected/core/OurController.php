@@ -11,6 +11,7 @@ class OurController
         $this->data = array();//用于存放向view传递的数据
         $this->data['header'] = APP_PATH."/views/template/header.php";  
         $this->data['footer'] = APP_PATH."/views/template/footer.php";
+        $this->data['bar']    = APP_PATH."/views/template/bar.php";
         $this->APP  = OurBlog::getInstance();
         $this->db   = $this->APP->db;//返回数据库的实例
     }

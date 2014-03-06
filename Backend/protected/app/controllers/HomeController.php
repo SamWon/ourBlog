@@ -32,15 +32,58 @@ class HomeController extends OurController
         if($type_id == -1)//带wrap全部
         {
             $this->data['articles'] = $this->article->get_all_article();
-            $this->loadView('home',$this->data);
+            if(empty($this->data['articles']))  
+            {
+                $this->data["error"] = "抱歉,没有找到相关内容=,.=";
+                $this->loadView('noresult',$this->data);
+            }else{
+                $this->loadView('home',$this->data);
+            }
         }elseif($type_id == 0){//不带wrap全部
             $this->data['articles'] = $this->article->get_all_article();
-            $this->loadView('category',$this->data);
+            if(empty($this->data['articles']))  
+            {
+                $this->data["error"] = "抱歉,没有找到相关内容=,.=";
+                $this->loadView('noresult',$this->data);
+            }else{
+                $this->loadView('category',$this->data);
+            }
         }else
         {
             $this->data['articles'] = $this->article->get_by_type($type_id);
-            $this->loadView('category',$this->data);
+            if(empty($this->data['articles']))  
+            {
+                $this->data["error"] = "抱歉,没有找到相关内容=,.=";
+                $this->loadView('noresult',$this->data);
+            }else{
+                $this->loadView('category',$this->data);
+            }
         }
+    }
+    
+    public function search()
+    {
+        $key = $this->_filter($_POST['search']);
+        $this->data['t_array'] = $this->type->get_type_array();//get type from id
+        $this->data['types'] = $this->type->get_all_type();
+        $this->data['articles'] = $this->article->get_by_search($key);
+            if(empty($this->data['articles']))  
+            {
+                $this->data["error"] = "抱歉,没有找到相关内容=,.=";
+                $this->loadView('noresult',$this->data);
+            }else{
+                $this->loadView('search',$this->data);
+            }
+
+        
+    }
+    private function _filter($content)
+    {
+        $content = preg_replace('/\s+/','',$content);
+        $content = addslashes($content);
+        $content = htmlspecialchars($content);
+        return $content;
+        
     }
 
     private function _get_cn_month($num)

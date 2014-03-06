@@ -41,7 +41,8 @@ class OurModel
         }
 
         $sql = "insert into {$table_name}({$field}) values({$value})";
-        return $this->db->query($sql);
+        $result = $this->db->query($sql);
+        return $this->make_result($result);
         
     }
 
@@ -59,7 +60,8 @@ class OurModel
         }
 
         $sql = "delete from {$table_name} where {$field} = {$value}";
-        return $this->db->query($sql);
+        $result = $this->db->query($sql);
+        return $this->make_result($result);
          
     }
 
@@ -117,7 +119,16 @@ class OurModel
         }
 
         $sql = "update {$table_name} set {$data_str} where {$info_f}={$info_v}";
-        return $this->db->query($sql);
+        $result =  $this->db->query($sql);
+        return $this->make_result($result);
+    }
+
+    public function search($table_name, $key)
+    {
+        //$sql = "SELECT * FROM {$table_name} WHERE UPPER(title) LIKE BINARY CONCAT('%',UPPER({$key}),'%') OR UPPER(content) LIKE BINARY CONCAT('%',UPPER({$key}),'%')";
+        $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%'";
+        $result =  $this->db->query($sql);
+        return $this->make_result($result);
     }
 
     /*工具函数：生成结果数组*/

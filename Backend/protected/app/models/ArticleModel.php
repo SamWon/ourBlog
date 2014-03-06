@@ -29,4 +29,9 @@ class ArticleModel extends OurModel
         return $this->get_where($this->_tablename, $info);
     }
 
+    public function get_by_search($key)
+    {
+        return $this->search($this->_tablename, $key);
+    }
+
 }
