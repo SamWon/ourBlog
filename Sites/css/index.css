@@ -55,6 +55,7 @@ body {
 }
 
 #iBody {
+    position: relative;
     display: none;
     margin-top: -18px;
     padding-bottom: 40px;
@@ -237,6 +238,14 @@ body {
     border: 0;
     background: url("../img/search-bg.png") no-repeat;
     cursor: pointer;
+}
+
+.load {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    left: 45%;
+    color: #fff;
 }
 /* END index */
 
