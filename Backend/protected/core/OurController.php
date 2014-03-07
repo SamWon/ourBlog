@@ -51,10 +51,10 @@ class OurController
     }
 
     /*在单例中加载扩展类 */
-    public function loadLibrary($libName)
+    public function loadLib($libName)
     {
         $libName = ucfirst($libName);
-        $libPath = LIB_PATH . '/' . $libNmae . '.php';
+        $libPath = LIB_PATH . '/' . $libName . '.php';
         if(empty($libName) || !file_exists($libPath))
         {
             exit('Library File not Found.');

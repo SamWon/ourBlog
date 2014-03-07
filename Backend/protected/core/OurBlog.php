@@ -26,7 +26,7 @@ class OurBlog
         $this->config = include(CONFIG_PATH.'/config.php'); //return the array of the config
         $this->params = $parser->parse($this->config);
         $this->isAjaxRequest = call_user_func(function(){
-            if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpREquest')
+            if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
                 return true;
             if(isset($_REQUEST['ajax']))
                 return true;

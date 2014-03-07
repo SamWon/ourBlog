@@ -89,13 +89,12 @@ class OurModel
             $value = $v;
         }
 
-        if($offset && $lines)
-            $sql = "select * from {$table_name} limit {$offset},{$lines} where {$field}={$value}";
+        if(isset($offset) && isset($lines))
+            $sql = "select * from {$table_name} where {$field}={$value} limit {$offset},{$lines} ";
         elseif($offset =="" && $lines == "")
             $sql = "select * from {$table_name} where {$field}={$value}";
         else
             die("Params error.");
-
         $result = $this->db->query($sql);
         return $this->make_result($result);
     }
@@ -137,5 +136,23 @@ class OurModel
         while($row = $result->fetch_object())                
             $data_array[] = $row;
         return $data_array;
+    }
+
+    /*返回数据的行数*/
+    public function get_count($table_name, $info = array())
+    {
+        if(!empty($info))
+        {
+            foreach($info as $k => $v)
+            {
+                $field = $k;
+                $value = $v;
+            }
+            $sql = "select * from {$table_name} where {$field}={$value}";
+        }else{
+            $sql = "select * from {$table_name}";
+        }
+        $result = $this->db->query($sql);
+        return $result->num_rows;
     }
 }
