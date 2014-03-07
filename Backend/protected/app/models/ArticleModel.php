@@ -67,8 +67,9 @@ class ArticleModel extends OurModel
         {
             $b->type = $type_array[$b->tid];
             $b->link = 'index.php/detail/index/'.$b->aid;
+            $b->time = substr($b->time,0,10);
         }
-        var_dump($b_result);exit;
+        //var_dump($b_result);exit;
         return $b_result;
     }
 
