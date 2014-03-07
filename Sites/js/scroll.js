@@ -34,8 +34,8 @@ $(document).ready(function() {
                                 content += '<div class="articleBlock">' +
                                             '<div class="time">' +
                                             '<div class="month">' + month[nowMonth[1]] + '</div>' +
-                                            '<div class="day">' + month[nowMonth[2]] + '</div>' +
-                                            '<div class="year">' + month[nowMonth[0]] + '</div>' +
+                                            '<div class="day">' + nowMonth[2] + '</div>' +
+                                            '<div class="year">' + nowMonth[0] + '</div>' +
                                             '</div>' +
                                             '<div class="text">' +
                                             '<h2 class="textTit"><a href="' + dataArray.link + '">' + dataArray.title + '</a></h2>' +
