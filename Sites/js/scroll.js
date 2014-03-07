@@ -17,43 +17,48 @@ $(document).ready(function() {
             }, 400);
 
             //加载文章
-            setTimeout(function(){
-                $.ajax({
-                    url: "/index.php/home/index",
-                    type: "post",
-                    dataType: "json",
-                    data: {
-                        number: number
-                    },
-                    success: function(datas) {
-                        if(datas.result === true) {
-                            var content = "",
-                                dataArray = datas.data,
-                                nowMonth = dataArray.time.split("-");
-                            for(var i = 0; i < datas.data.length; i++) {
-                                content += '<div class="articleBlock">' +
-                                            '<div class="time">' +
-                                            '<div class="month">' + month[nowMonth[1]] + '</div>' +
-                                            '<div class="day">' + nowMonth[2] + '</div>' +
-                                            '<div class="year">' + nowMonth[0] + '</div>' +
-                                            '</div>' +
-                                            '<div class="text">' +
-                                            '<h2 class="textTit"><a href="' + dataArray.link + '">' + dataArray.title + '</a></h2>' +
-                                            '<p class="textKind">分类：' + dataArray.type + '</p>' +
+            if(onload === 0) {
+                onload = 1;
 
-                                            '<div class="textContent">' +
-                                            dataArray.content +
-                                            '</div>' +
-                                            '</div>' +
-                                            '</div>';
-                            }//END for
-                            $(content).insertBefore($load);
-                        } else {
-                            $load.html("请期待更多的精彩...");
+                setTimeout(function(){
+                    $.ajax({
+                        url: "/index.php/home/index",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            number: number
+                        },
+                        success: function(datas) {
+                            if(datas.result === true) {
+                                var content = "",
+                                    dataArray = datas.data,
+                                    nowMonth = dataArray.time.split("-");
+                                for(var i = 0; i < datas.data.length; i++) {
+                                    content += '<div class="articleBlock">' +
+                                                '<div class="time">' +
+                                                '<div class="month">' + month[nowMonth[1]] + '</div>' +
+                                                '<div class="day">' + nowMonth[2] + '</div>' +
+                                                '<div class="year">' + nowMonth[0] + '</div>' +
+                                                '</div>' +
+                                                '<div class="text">' +
+                                                '<h2 class="textTit"><a href="' + dataArray.link + '">' + dataArray.title + '</a></h2>' +
+                                                '<p class="textKind">分类：' + dataArray.type + '</p>' +
+
+                                                '<div class="textContent">' +
+                                                dataArray.content +
+                                                '</div>' +
+                                                '</div>' +
+                                                '</div>';
+                                }//END for
+                                $(content).insertBefore($load);
+                                onload = 0;
+                            } else {
+                                $load.html("请期待更多的精彩...");
+                            }
                         }
-                    }
-                });//END ajax
-            }, 800);
+                    });//END ajax
+                }, 800);
+            }
         }
     });
 });
