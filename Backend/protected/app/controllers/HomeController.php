@@ -23,9 +23,10 @@ class HomeController extends OurController
             '11' => '十一月',
             '12' => '十二月'
         );
-        if($this->isAjaxRequest)
+
+        if($this->APP->isAjaxRequest)
         {
-            $this->is_ajax[0] = $this->isAjaxRequest;
+            $this->is_ajax[0] = $this->APP->isAjaxRequest;
             $this->is_ajax[1] = $_REQUEST['number'];
             $this->is_ajax[2] = 5; //the articles per request
             $this->is_ajax[3] = $this->type->get_all_type();
@@ -38,6 +39,7 @@ class HomeController extends OurController
         $this->data['t_array'] = $this->type->get_type_array();//get type from id
         $this->data['types'] = $this->type->get_all_type();
         /*首次加载的内容*/
+        $type_id = 1;
         if($type_id == -1)//带wrap全部
         {
             $this->data['articles'] = $this->article->get_all_article($this->is_ajax);
@@ -69,13 +71,18 @@ class HomeController extends OurController
 
         }else
         {
-            $this->data['articles'] = $this->article->get_by_type($type_id,$this->is_ajax);
-            if(empty($this->data['articles']))  
-            {
-                $this->data["error"] = "抱歉,没有找到相关内容=,.=";
-                $this->loadView('noresult',$this->data);
-            }else{
-                $this->loadView('category',$this->data);
+            var_dump($type_id);
+            if($this->is_ajax[0])
+                $this->data['articles'] = $this->article->get_by_type($type_id,$this->is_ajax);
+            else{
+                $this->data['articles'] = $this->article->get_by_type($type_id,$this->is_ajax);
+                if(empty($this->data['articles']))  
+                {
+                    $this->data["error"] = "抱歉,没有找到相关内容=,.=";
+                    $this->loadView('noresult',$this->data);
+                }else{
+                    $this->loadView('category',$this->data);
+                }
             }
         }
     }

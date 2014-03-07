@@ -45,6 +45,7 @@
                         </div>
                     </div>
 <?php endforeach;?>
+                    <div class="load">加载中...</div>
                 </div>
                 <!-- END content -->
 
@@ -64,6 +65,7 @@
     </body>
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/scroll.js"></script>
     <script type="text/javascript" src="/js/jquery.coffee.js"></script>
     <script type="text/javascript">
         $(function() {
