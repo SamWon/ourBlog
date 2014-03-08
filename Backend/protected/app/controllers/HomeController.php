@@ -36,11 +36,13 @@ class HomeController extends OurController
     /*当$type_id为0的时候是有wrap的，为1是所有，其它的是目录页面*/
     public function index($type_id = -1)
     {
+        $type_id = (int)$type_id;
+        //var_dump($type_id);exit;
+        $ha = (int)(-1);
         $this->data['t_array'] = $this->type->get_type_array();//get type from id
         $this->data['types'] = $this->type->get_all_type();
         /*首次加载的内容*/
-        $type_id = 1;
-        if($type_id == -1)//带wrap全部
+        if($type_id === -1)//带wrap全部
         {
             $this->data['articles'] = $this->article->get_all_article($this->is_ajax);
             if(empty($this->data['articles']))  
@@ -48,18 +50,9 @@ class HomeController extends OurController
                 $this->data["error"] = "抱歉,没有找到相关内容=,.=";
                 $this->loadView('noresult',$this->data);
             }else{
-                /*
-                if($this->isAjaxRequest)
-                {
-                    $per = 5;
-                    $num = $_REQUEST['number'];    //get times of request from front
-                    $ajax_data = $this->article->get_by_ajax($num, $per);
-                }
-                 */
                 $this->loadView('home',$this->data);
             }
-
-        }elseif($type_id == 0){//不带wrap全部
+        }elseif($type_id === 0){//不带wrap全部
             $this->data['articles'] = $this->article->get_all_article($this->is_ajax);
             if(empty($this->data['articles']))  
             {
@@ -68,10 +61,7 @@ class HomeController extends OurController
             }else{
                 $this->loadView('category',$this->data);
             }
-
-        }else
-        {
-            var_dump($type_id);
+        }else {
             if($this->is_ajax[0])
                 $this->data['articles'] = $this->article->get_by_type($type_id,$this->is_ajax);
             else{

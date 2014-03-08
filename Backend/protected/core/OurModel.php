@@ -83,15 +83,19 @@ class OurModel
 
     public function get_where($table_name, $info = array() ,$offset="" , $lines="")
     {
+        if(!is_integer($offset) || !is_integer($lines))
+        {
+            $offset = (int)$offset;
+            $lines  = (int)$lines;
+        }
         foreach($info as $k => $v)
         {
             $field = $k;
             $value = $v;
         }
-
-        if(isset($offset) && isset($lines))
+        if(!($offset === "") && !empty($lines))
             $sql = "select * from {$table_name} where {$field}={$value} limit {$offset},{$lines} ";
-        elseif($offset =="" && $lines == "")
+        elseif(empty($offset)  && empty($lines) )
             $sql = "select * from {$table_name} where {$field}={$value}";
         else
             die("Params error.");
