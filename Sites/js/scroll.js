@@ -2,6 +2,7 @@ $(document).ready(function() {
     var $iBody = $("#iBody"),
         $window = $(window),
         $load = $(".load"),
+        kind = location.pathname.split("/"),
         month = [0, "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
         number = 1,
         //判断是否发送ajax
@@ -20,9 +21,15 @@ $(document).ready(function() {
             if(onload === 0) {
                 onload = 1;
 
+                if(!kind[kind.length - 1]) {
+                    kind = kind;
+                } else {
+                    kind = kind[kind.length - 1];
+                }
+
                 setTimeout(function(){
                     $.ajax({
-                        url: "/index.php/home/index",
+                        url: "/index.php/home/index" + kind,
                         type: "post",
                         dataType: "json",
                         data: {
@@ -54,6 +61,7 @@ $(document).ready(function() {
                                 onload = 0;
                             } else {
                                 $load.html("请期待更多的精彩...");
+                                onload = 1;
                             }
                         }
                     });//END ajax
