@@ -23,23 +23,15 @@
                 </select>
             </div>
 
-            <textarea id="editor1" name="editor1" rows="10" cols="80">
+            <textarea id="test" style="width: 900px; height: 800px">
             </textarea>
 
             <input type="submit" value="提交" />
         </form>
     </body>
-    <script src="../js/ckeditor/ckeditor.js"></script>
-    <script>
-        // Replace the <textarea id="editor1"> with a CKEditor
-            // instance, using default configuration.
-            CKEDITOR.replace( 'editor1',
-            {
-            height: 800,
-            width: 900,
-            filebrowserUploadUrl: '/uploader/upload.php',
-            filebrowserImageUploadUrl: '/uploader/upload.php?type=Images'
-            }
-            );
+    <script type="text/javascript" src="../js/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="../js/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript">
+        var editor = UE.getEditor("test");
     </script>
 </html>
