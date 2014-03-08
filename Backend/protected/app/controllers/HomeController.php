@@ -24,6 +24,12 @@ class HomeController extends OurController
             '12' => '十二月'
         );
 
+
+    }
+
+    /*当$type_id为0的时候是有wrap的，为1是所有，其它的是目录页面*/
+    public function index($type_id = -1)
+    {
         if($this->APP->isAjaxRequest)
         {
             $this->is_ajax[0] = $this->APP->isAjaxRequest;
@@ -31,14 +37,8 @@ class HomeController extends OurController
             $this->is_ajax[2] = 5; //the articles per request
             $this->is_ajax[3] = $this->type->get_all_type();
         }
-    }
-
-    /*当$type_id为0的时候是有wrap的，为1是所有，其它的是目录页面*/
-    public function index($type_id = -1)
-    {
+        //var_dump($this->is_ajax);
         $type_id = (int)$type_id;
-        //var_dump($type_id);exit;
-        $ha = (int)(-1);
         $this->data['t_array'] = $this->type->get_type_array();//get type from id
         $this->data['types'] = $this->type->get_all_type();
         /*首次加载的内容*/
@@ -52,7 +52,7 @@ class HomeController extends OurController
             }else{
                 $this->loadView('home',$this->data);
             }
-        }elseif($type_id === 0){//不带wrap全部
+        }elseif($type_id ===(int)0){//不带wrap全部
             $this->data['articles'] = $this->article->get_all_article($this->is_ajax);
             if(empty($this->data['articles']))  
             {
@@ -62,8 +62,12 @@ class HomeController extends OurController
                 $this->loadView('category',$this->data);
             }
         }else {
+            //$this->is_ajax = array(true, 1, 5) ;
             if($this->is_ajax[0])
+            {
                 $this->data['articles'] = $this->article->get_by_type($type_id,$this->is_ajax);
+                $this->loadView('category',$this->data);
+            }
             else{
                 $this->data['articles'] = $this->article->get_by_type($type_id,$this->is_ajax);
                 if(empty($this->data['articles']))  
