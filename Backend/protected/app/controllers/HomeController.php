@@ -44,22 +44,33 @@ class HomeController extends OurController
         /*首次加载的内容*/
         if($type_id === -1)//带wrap全部
         {
-            $this->data['articles'] = $this->article->get_all_article($this->is_ajax);
-            if(empty($this->data['articles']))  
+            if($is_ajax[0])
             {
-                $this->data["error"] = "抱歉,没有找到相关内容=,.=";
-                $this->loadView('noresult',$this->data);
+                $this->data['articles'] = $this->article->get_all_article($this->is_ajax);
             }else{
-                $this->loadView('home',$this->data);
+                $this->data['articles'] = $this->article->get_all_article($this->is_ajax);
+                if(empty($this->data['articles']))  
+                {
+                    $this->data["error"] = "抱歉,没有找到相关内容=,.=";
+                    $this->loadView('noresult',$this->data);
+                }else{
+                    $this->loadView('home',$this->data);
+                }
             }
         }elseif($type_id ===(int)0){//不带wrap全部
-            $this->data['articles'] = $this->article->get_all_article($this->is_ajax);
-            if(empty($this->data['articles']))  
+            if($this->is_ajax[0])
             {
-                $this->data["error"] = "抱歉,没有找到相关内容=,.=";
-                $this->loadView('noresult',$this->data);
+                $this->data['articles'] = $this->article->get_all_article($this->is_ajax);
             }else{
-                $this->loadView('category',$this->data);
+                $this->data['articles'] = $this->article->get_all_article($this->is_ajax);
+                if(empty($this->data['articles']))  
+                {
+                    var_dump($this->data['articles']);
+                    $this->data["error"] = "抱歉,没有找到相关内容=,.=";
+                    $this->loadView('noresult',$this->data);
+                }else{
+                    $this->loadView('category',$this->data);
+                }
             }
         }else {
             //$this->is_ajax = array(true, 1, 5) ;
@@ -67,8 +78,7 @@ class HomeController extends OurController
             {
                 $this->data['articles'] = $this->article->get_by_type($type_id,$this->is_ajax);
                 //$this->loadView('category',$this->data);
-            }
-            else{
+            } else{
                 $this->data['articles'] = $this->article->get_by_type($type_id,$this->is_ajax);
                 if(empty($this->data['articles']))  
                 {
@@ -109,8 +119,6 @@ class HomeController extends OurController
     {
         return $this->time_array[$num];
     }
-
-
 }
 
 

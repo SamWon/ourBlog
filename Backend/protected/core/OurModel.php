@@ -70,9 +70,9 @@ class OurModel
     {
         if(empty($table_name))
             die("Please input the tablename");
-        if($offset && $lines)
+        if(!($offset === "") && !empty($lines))
             $sql = "select * from {$table_name} limit {$offset},{$lines}";
-        elseif($offset == null && $lines == null)
+        elseif(empty($offset)&& empty($lines))
             $sql = "select * from {$table_name}";
         else
             die("Params error.");

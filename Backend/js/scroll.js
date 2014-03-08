@@ -11,12 +11,6 @@ $(document).ready(function() {
 
     $window.on("scroll", function() {
         if($window.scrollTop() >= ($iBody.height() - screenHeight)) {
-            //显示加载中
-            $load.show();
-            setTimeout(function(){
-                $load.fadeOut(400);
-            }, 400);
-
             //加载文章
             if(onload === 0) {
                 onload = 1;
@@ -27,46 +21,57 @@ $(document).ready(function() {
                     kind = kind[kind.length - 1];
                 }
 
-                setTimeout(function(){
-                    $.ajax({
-                        url: "/index.php/home/index/" + kind,
-                        type: "post",
-                        dataType: "json",
-                        data: {
-                            number: number
-                        },
-                        success: function(datas) {
-                            if(datas.result === "true") {
-                                var content = "",
-                                    dataArray = datas.data;
-                                for(var i = 0; i < datas.data.length; i++) {
-                                    var nowMonth = dataArray[i].time.split("-");
-                                    content += '<div class="articleBlock">' +
-                                                '<div class="time">' +
-                                                '<div class="month">' + month[window.parseInt(nowMonth[1])] + '</div>' +
-                                                '<div class="day">' + nowMonth[2] + '</div>' +
-                                                '<div class="year">' + nowMonth[0] + '</div>' +
-                                                '</div>' +
-                                                '<div class="text">' +
-                                                '<h2 class="textTit"><a href="' + dataArray[i].link + '">' + dataArray[i].title + '</a></h2>' +
-                                                '<p class="textKind">分类：' + dataArray[i].type + '</p>' +
+                $.ajax({
+                    url: "/index.php/home/index/" + kind,
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        number: number
+                    },
+                    success: function(datas) {
+                        if(datas.result === "true") {
+                            //显示加载中
+                            $load.show();
+                            setTimeout(function(){
+                                $load.fadeOut(400);
+                            }, 400);
 
-                                                '<div class="textContent">' +
-                                                dataArray[i].content +
-                                                '</div>' +
-                                                '</div>' +
-                                                '</div>';
-                                }//END for
+                            var content = "",
+                                dataArray = datas.data;
+                            for(var i = 0; i < datas.data.length; i++) {
+                                var nowMonth = dataArray[i].time.split("-");
+                                content += '<div class="articleBlock">' +
+                                            '<div class="time">' +
+                                            '<div class="month">' + month[window.parseInt(nowMonth[1])] + '</div>' +
+                                            '<div class="day">' + nowMonth[2] + '</div>' +
+                                            '<div class="year">' + nowMonth[0] + '</div>' +
+                                            '</div>' +
+                                            '<div class="text">' +
+                                            '<h2 class="textTit"><a href="' + dataArray[i].link + '">' + dataArray[i].title + '</a></h2>' +
+                                            '<p class="textKind">分类：' + dataArray[i].type + '</p>' +
+
+                                            '<div class="textContent">' +
+                                            dataArray[i].content +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>';
+                            }//END for
+                            setTimeout(function(){
                                 $(content).insertBefore($load);
-                                onload = 0;
-                                number++;
-                            } else {
-                                $load.html("请期待更多的精彩...");
-                                onload = 1;
-                            }
+                            }, 800);
+                            onload = 0;
+                            number++;
+                        } else {
+                            $load.html("请期待更多的精彩...");
+                            onload = 1;
+                            //显示加载中
+                            $load.show();
+                            setTimeout(function(){
+                                $load.fadeOut(400);
+                            }, 400);
                         }
-                    });//END ajax
-                }, 800);
+                    }
+                });//END ajax
             }
         }
     });

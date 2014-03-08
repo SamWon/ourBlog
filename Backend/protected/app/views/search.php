@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="text">
-                        <h2 class="textTit"><a href="#"><?php echo $a->title;?></a></h2>
+                        <h2 class="textTit"><a href="/index.php/detail/index/<?php echo $a->aid;?>"><?php echo $a->title;?></a></h2>
 
                         <p class="textKind">分类:<?php echo $t_array[$a->tid];?></p>
 
