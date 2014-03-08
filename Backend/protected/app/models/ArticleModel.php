@@ -39,7 +39,6 @@ class ArticleModel extends OurModel
             }
             header('Content-Type:text/html;charset=utf-8');
             echo json_encode($this->json_array);
-            return $this->get_where($this->_tablename, $info, 0, 5);
         }else{
             return $this->get_where($this->_tablename, $info, 0, 5);
         }

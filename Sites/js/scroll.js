@@ -29,36 +29,37 @@ $(document).ready(function() {
 
                 setTimeout(function(){
                     $.ajax({
-                        url: "/index.php/home/index" + kind,
+                        url: "/index.php/home/index/" + kind,
                         type: "post",
                         dataType: "json",
                         data: {
                             number: number
                         },
                         success: function(datas) {
-                            if(datas.result === true) {
+                            if(datas.result === "true") {
                                 var content = "",
-                                    dataArray = datas.data,
-                                    nowMonth = dataArray.time.split("-");
+                                    dataArray = datas.data;
                                 for(var i = 0; i < datas.data.length; i++) {
+                                    var nowMonth = dataArray[i].time.split("-");
                                     content += '<div class="articleBlock">' +
                                                 '<div class="time">' +
-                                                '<div class="month">' + month[nowMonth[1]] + '</div>' +
+                                                '<div class="month">' + month[window.parseInt(nowMonth[1])] + '</div>' +
                                                 '<div class="day">' + nowMonth[2] + '</div>' +
                                                 '<div class="year">' + nowMonth[0] + '</div>' +
                                                 '</div>' +
                                                 '<div class="text">' +
-                                                '<h2 class="textTit"><a href="' + dataArray.link + '">' + dataArray.title + '</a></h2>' +
-                                                '<p class="textKind">分类：' + dataArray.type + '</p>' +
+                                                '<h2 class="textTit"><a href="' + dataArray[i].link + '">' + dataArray[i].title + '</a></h2>' +
+                                                '<p class="textKind">分类：' + dataArray[i].type + '</p>' +
 
                                                 '<div class="textContent">' +
-                                                dataArray.content +
+                                                dataArray[i].content +
                                                 '</div>' +
                                                 '</div>' +
                                                 '</div>';
                                 }//END for
                                 $(content).insertBefore($load);
                                 onload = 0;
+                                number++;
                             } else {
                                 $load.html("请期待更多的精彩...");
                                 onload = 1;

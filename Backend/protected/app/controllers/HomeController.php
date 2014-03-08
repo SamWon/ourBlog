@@ -66,7 +66,7 @@ class HomeController extends OurController
             if($this->is_ajax[0])
             {
                 $this->data['articles'] = $this->article->get_by_type($type_id,$this->is_ajax);
-                $this->loadView('category',$this->data);
+                //$this->loadView('category',$this->data);
             }
             else{
                 $this->data['articles'] = $this->article->get_by_type($type_id,$this->is_ajax);

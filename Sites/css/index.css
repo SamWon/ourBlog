@@ -154,6 +154,10 @@ body {
     max-width: 685px;
 }
 
+#iBody .articleBlock .textContent {
+    line-height: 25px;
+}
+
 #iBody .aside {
     width: 140px;
     margin-left: 20px;
