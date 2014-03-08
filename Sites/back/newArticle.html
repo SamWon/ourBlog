@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>创建文章</title>
+        <link rel="stylesheet" href="../css/back.css" />
+    </head>
+    <body>
+        <div class="manage">管理：<a href="#">文章</a> | <a href="#">分类</a></div>
+
+        <form>
+            <div>
+                <label for="">文章名称</label>
+                <input class="articleName" type="text" />
+            </div>
+
+            <div>
+                <label for="">文章分类</label>
+                <select name="">
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+            </div>
+
+            <textarea id="editor1" name="editor1" rows="10" cols="80">
+            </textarea>
+
+            <input type="submit" value="提交" />
+        </form>
+    </body>
+    <script src="../js/ckeditor/ckeditor.js"></script>
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            CKEDITOR.replace( 'editor1',
+            {
+            height: 800,
+            width: 900,
+            filebrowserUploadUrl: '/uploader/upload.php',
+            filebrowserImageUploadUrl: '/uploader/upload.php?type=Images'
+            }
+            );
+    </script>
+</html>
