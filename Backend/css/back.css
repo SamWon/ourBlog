@@ -1,0 +1,24 @@
+body {
+    background: #ccc;
+    padding-bottom: 50px;
+}
+
+.manage {
+    margin-bottom: 30px;
+}
+
+.manage, .manage a {
+    font-size: 25px;
+}
+
+.articleName {
+    width: 300px;
+}
+
+table {
+    width: 900px;
+}
+
+td {
+    text-align: center;
+}
