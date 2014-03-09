@@ -21,10 +21,24 @@ class URLParser
         //将uri中的class & method 抽丝剥茧出来
         $apart = '/';
         $this->className = strtok( $this->uri, $apart );
-        $this->className = ($this->className == false) 
-                           ? ucfirst($config['defaultController']) . 'Controller'
-                           : ucfirst($this->className) . 'Controller';
-        $this->illegal   = (preg_match('/^[\w_-]+$/' , $this->className )) ? true : false ; //???
+        //加上可能有目录的情况
+        $tmpName = $this->className;
+        $is_dir =APP_PATH."/controllers/".$this->className;
+        if(is_dir($is_dir) && $is_dir != APP_PATH."/controllers/")
+        {
+            $this->className = ucfirst(strtok( $apart ));
+            $this->className = $tmpName.'/'.$this->className;
+            //var_dump($this->className);
+            $this->className = (explode('/' , $this->className)[1] == false) 
+                               ? $this->className . 'BackController'
+                               : $this->className . 'Controller';
+        }else{
+            $this->className = ($this->className == false) 
+                               ? ucfirst($config['defaultController']) . 'Controller'
+                               : ucfirst($this->className) . 'Controller';
+        }
+
+        //$this->illegal   = (preg_match('/^[\w_-]+$/' , $this->className )) ? true : false ; //???
         $temp = (strtolower( strtok($apart) ));
         $this->action    = $temp ? $temp : "index";
 

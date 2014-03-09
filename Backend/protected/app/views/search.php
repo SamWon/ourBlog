@@ -30,6 +30,7 @@
                         </div>
                     </div>
 <?php endforeach;?>
+                    <div class="load">加载中...</div>
                 </div>
                 <!-- END content -->
 

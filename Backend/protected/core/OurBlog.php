@@ -61,15 +61,15 @@ class OurBlog
         {
             $this->db=DB::getInstance()->connectDB();//Connect to  the database
             //$this->isAdmin = $this->loginCheck();
-            if($this->params['illegal'] !== false) 
-            {
+            //if($this->params['illegal'] !== false) 
+            //{
                 $this->handleRequest($this->params['className']);
                 //$this->log("request class {$this->params['className']} with the action {$this->params['action']}", 'log');
-            }
-            else
-            {
-                $this->show_404();
-            }
+            //}
+            //else
+            //{
+                //$this->show_404();
+            //}
         }
         catch(OurException $e)//如果没有catch到自定义异常，那么就用内置异常类处理
         {
@@ -90,7 +90,14 @@ class OurBlog
     private function handleRequest($className)
     {
         $tempClassName = ucfirst($className);
+        //var_dump($tempClassName);exit;
         $this->loadClass(APP_PATH. '/controllers/'. $tempClassName. '.php');//include the file
+        //var_dump($tmpClassName);exit;
+        if(strpos($tempClassName, '/') >= 0 && strpos($tempClassName, '/') !== false )//判断是不是带目录的class
+        {
+            $tmp = explode('/', $tempClassName );
+            $tempClassName = $tmp[1];
+        }
         $class = new $tempClassName();
         $method = $this->params['action'];
         call_user_func_array(array($class, $method), $this->params['params']);//array的第一个参数是类的实例，第二个参数就是类的方法

@@ -31,13 +31,11 @@ class HomeController extends OurController
             $this->is_ajax[2] = 5; //the articles per request
             $this->is_ajax[3] = $this->type->get_all_type();
         }
-
     }
 
     /*当$type_id为0的时候是有wrap的，为1是所有，其它的是目录页面*/
     public function index($type_id = -1)
     {
-        //var_dump($this->is_ajax);
         $type_id = (int)$type_id;
         $this->data['t_array'] = $this->type->get_type_array();//get type from id
         $this->data['types'] = $this->type->get_all_type();
@@ -93,16 +91,18 @@ class HomeController extends OurController
     
     public function search()
     {
-        $key = $this->_filter($_POST['search']);
+        session_start();
+        if(!$this->is_ajax[0])
+        {
+            $_SESSION['key'] = $this->_filter($_POST['search']);
+        }
         $this->data['t_array'] = $this->type->get_type_array();//get type from id
         $this->data['types'] = $this->type->get_all_type();
-        //var_dump($this->is_ajax);
         if($this->is_ajax[0])
         {
-            var_dump($this->is_ajax);
-            $this->data['articles'] = $this->article->get_by_search($key,$this->is_ajax);
+            $this->data['articles'] = $this->article->get_by_search($_SESSION['key'],$this->is_ajax);
         }else{
-            $this->data['articles'] = $this->article->get_by_search($key,$this->is_ajax);
+            $this->data['articles'] = $this->article->get_by_search($_SESSION['key'],$this->is_ajax);
             if(empty($this->data['articles']))  
             {
                 $this->data["error"] = "抱歉,没有找到相关内容=,.=";

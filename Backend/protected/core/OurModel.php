@@ -35,14 +35,24 @@ class OurModel
             else
                 $field  = "$k" ;
             if($value)
-                $value .= ",$v";
+            {
+                if(is_string($value))
+                    $value .= ",'$v'";
+                else
+                    $value .= ",$v";
+            }
             else
-                $value  = "$v" ;
+            {
+                if(is_string($value))
+                    $value .= "'$v'";
+                else
+                    $value .= "$v";
+            }
         }
 
-        $sql = "insert into {$table_name}({$field}) values({$value})";
+        $sql = "insert into {$table_name}({$field}) values({$value})";//字符串插入加引号 
         $result = $this->db->query($sql);
-        return $this->make_result($result);
+        return $result;
         
     }
 
@@ -61,7 +71,7 @@ class OurModel
 
         $sql = "delete from {$table_name} where {$field} = {$value}";
         $result = $this->db->query($sql);
-        return $this->make_result($result);
+        return $result;
          
     }
 
@@ -116,25 +126,35 @@ class OurModel
         foreach($data as $key => $val)
         {
             if($data_str)
-                $data_str .= ",$key=$val";
+            {
+                if(is_string($val))
+                    $data_str .= ",$key='$val'";
+                else
+                    $data_str .= ",$key=$val";
+            }
             else
-                $data_str .= "$key=$val";
+            {
+                if(is_string($val))
+                    $data_str .= "$key='$val'";
+                else
+                    $data_str .= "$key=$val";
+            }
         }
 
         $sql = "update {$table_name} set {$data_str} where {$info_f}={$info_v}";
         $result =  $this->db->query($sql);
-        return $this->make_result($result);
+        return $result;
     }
 
     public function search($table_name, $key , $offset="", $lines="")
     {
         //$sql = "SELECT * FROM {$table_name} WHERE UPPER(title) LIKE BINARY CONCAT('%',UPPER({$key}),'%') OR UPPER(content) LIKE BINARY CONCAT('%',UPPER({$key}),'%')";
         if(!($offset === "") && !empty($lines))
-            $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%'limit {$offset},{$lines}";
-            $sql = "select * from {$table_name} where {$field}={$value} limit {$offset},{$lines} ";
+            $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%' limit {$offset},{$lines}";
+            //$sql = "select * from {$table_name} where {$field}={$value} limit {$offset},{$lines} ";
         elseif(empty($offset)  && empty($lines) )
             $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%'";
-            $sql = "select * from {$table_name} where {$field}={$value}";
+            //$sql = "select * from {$table_name} where {$field}={$value}";
         else
             die("Params error.");
         $result =  $this->db->query($sql);
@@ -160,11 +180,11 @@ class OurModel
                 $value = $v;
             }
             $sql = "select * from {$table_name} where {$field}={$value}";
+        }elseif(!empty($key)){
+            $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%'";
         }else{
             $sql = "select * from {$table_name}";
         }
-        if(!empty($key))
-            $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%'";
         $result = $this->db->query($sql);
         return $result->num_rows;
     }

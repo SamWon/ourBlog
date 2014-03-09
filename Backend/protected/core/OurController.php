@@ -135,4 +135,10 @@ class OurController
         $this->$key = $value;
     }
 
+    public function warning($msg)
+    {
+        echo "<script language='javascript'>alert( \"$msg\" );history.go(-1);</script>";
+        
+    }
+
 }
