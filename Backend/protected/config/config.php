@@ -9,6 +9,7 @@ return array(
     'password' => 'fuckyou',
     'database' => 'ourblog',
 
-    //pagination 
-    'pagination' => 2
+    //user validation
+    'loginname' => 'daqiantai',
+    'loginpwd'   => 'daqiantai'
 );

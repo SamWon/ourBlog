@@ -5,7 +5,13 @@ class BackController extends OurController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         date_default_timezone_set('Asia/Shanghai');
+        $this->config = include(CONFIG_PATH.'/config.php');
+        if(!isset($_SESSION['loginname']) || $_SESSION['loginname'] != $this->config['loginname'])
+        {
+            header("Location: /index.php/home");
+        }
         $this->loadModel('article');
         $this->loadModel('type');
     }
