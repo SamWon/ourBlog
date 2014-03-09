@@ -17,10 +17,10 @@ $(document).ready(function() {
                 onload = 1;
 
                 if(!kind[kind.length - 1]) {
-                    pageUrl = "/index.php/home/search/"
+                    pageUrl = "/index.php/home/search/";
                 } else {
                     kind = kind[kind.length - 1];
-                    pageUrl = "/index.php/home/index/" + kind,
+                    pageUrl = "/index.php/home/index/" + kind;
                 }
 
                 $.ajax({

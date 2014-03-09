@@ -3,6 +3,7 @@ $(document).ready(function() {
         $window = $(window),
         $load = $(".load"),
         kind = location.pathname.split("/"),
+        pageUrl = "",
         month = [0, "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
         number = 1,
         //判断是否发送ajax
@@ -16,13 +17,14 @@ $(document).ready(function() {
                 onload = 1;
 
                 if(!kind[kind.length - 1]) {
-                    kind = kind;
+                    pageUrl = "/index.php/home/search/";
                 } else {
                     kind = kind[kind.length - 1];
+                    pageUrl = "/index.php/home/index/" + kind;
                 }
 
                 $.ajax({
-                    url: "/index.php/home/index/" + kind,
+                    url: pageUrl,
                     type: "post",
                     dataType: "json",
                     data: {

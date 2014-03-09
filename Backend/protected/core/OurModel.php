@@ -126,10 +126,17 @@ class OurModel
         return $this->make_result($result);
     }
 
-    public function search($table_name, $key)
+    public function search($table_name, $key , $offset="", $lines="")
     {
         //$sql = "SELECT * FROM {$table_name} WHERE UPPER(title) LIKE BINARY CONCAT('%',UPPER({$key}),'%') OR UPPER(content) LIKE BINARY CONCAT('%',UPPER({$key}),'%')";
-        $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%'";
+        if(!($offset === "") && !empty($lines))
+            $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%'limit {$offset},{$lines}";
+            $sql = "select * from {$table_name} where {$field}={$value} limit {$offset},{$lines} ";
+        elseif(empty($offset)  && empty($lines) )
+            $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%'";
+            $sql = "select * from {$table_name} where {$field}={$value}";
+        else
+            die("Params error.");
         $result =  $this->db->query($sql);
         return $this->make_result($result);
     }
@@ -143,7 +150,7 @@ class OurModel
     }
 
     /*返回数据的行数*/
-    public function get_count($table_name, $info = array())
+    public function get_count($table_name, $info = array(), $key="")
     {
         if(!empty($info))
         {
@@ -156,6 +163,8 @@ class OurModel
         }else{
             $sql = "select * from {$table_name}";
         }
+        if(!empty($key))
+            $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%'";
         $result = $this->db->query($sql);
         return $result->num_rows;
     }

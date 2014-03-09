@@ -71,12 +71,34 @@ class ArticleModel extends OurModel
 
     public function get_by_search($key, $is_ajax)
     {
-        return $this->search($this->_tablename, $key);
+        //return $this->search($this->_tablename, $key);
+        $all_count = $this->_get_all_count($info ,$key);
+        $remain_count = $all_count - ($is_ajax[1] * $is_ajax[2]);
+        if($is_ajax[0])
+        {
+            if($remain_count <= 0) //如果没有后续的话,那么返回null
+            {
+                $this->json_array['data']   = '';
+                $this->json_array['result'] = 'false';
+            } else {
+                $offset = $is_ajax[2] * $is_ajax[1];
+                //$tmp = $this->get_where($this->_tablename, $info, $offset, $is_ajax[2]);
+                $tmp = $this->search($this->_tablename, $key, $offset, $is_ajax[2]);
+                $tmp = $this->_make_ajax_result($tmp, $is_ajax[3]);//向结果数组加入链接
+                $this->json_array['data'] = $tmp;
+                $this->json_array['result'] = 'true';
+            }
+            header('Content-Type:text/html;charset=utf-8');
+            echo json_encode($this->json_array);
+        }else{
+            return $this->search($this->_tablename, $key, 0, 5);
+            //return $this->get_where($this->_tablename, $info, 0, 5);
+        }
     }
 
-    private function _get_all_count($info = array())
+    private function _get_all_count($info = array(),$key="")
     {
-       return $this->get_count($this->_tablename, $info);
+       return $this->get_count($this->_tablename, $info, $key);
     }
 
     private function _make_ajax_result($b_result , $type_array)
