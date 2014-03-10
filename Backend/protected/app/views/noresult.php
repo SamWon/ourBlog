@@ -5,6 +5,7 @@
         <title>our blog</title>
         <link rel="stylesheet" href="/css/reset.css" />
         <link rel="stylesheet" href="/css/index.css" />
+        <link rel="stylesheet" href="/css/fcie.css" />
     </head>
     <body>
         <div id="iBody" class="detailBody">
@@ -51,4 +52,7 @@
             });
         });
     </script>
+    <!--[if lt IE 8]>
+        <script type="text/javascript" src="../js/fcie.js"></script>
+    <![endif]-->
 </html>
