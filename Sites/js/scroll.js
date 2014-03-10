@@ -12,15 +12,15 @@ $(document).ready(function() {
 
     $window.on("scroll", function() {
         if($window.scrollTop() >= ($iBody.height() - screenHeight)) {
+            //显示加载中
+            $load.show();
+            setTimeout(function(){
+                $load.fadeOut(400);
+            }, 400);
+
             //加载文章
             if(onload === 0) {
                 onload = 1;
-
-                //显示加载中
-                $load.show();
-                setTimeout(function(){
-                    $load.fadeOut(400);
-                }, 400);
 
                 if(!kind[kind.length - 1]) {
                     pageUrl = "/index.php/home/search/";
@@ -51,7 +51,7 @@ $(document).ready(function() {
                                                 '</div>' +
                                                 '<div class="text">' +
                                                 '<h2 class="textTit"><a href="' + dataArray[i].link + '">' + dataArray[i].title + '</a></h2>' +
-                                                '<p class="textKind">分类：' + dataArray[i].type.name + '</p>' +
+                                                '<p class="textKind">分类：' + dataArray[i].type + '</p>' +
 
                                                 '<div class="textContent">' +
                                                 dataArray[i].content +

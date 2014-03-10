@@ -1,7 +1,0 @@
-AuthType Basic
-AuthName "Enter the password:"
-AuthUserFile /private/var/www/ourBlog/Backend/protected/app/controllers/Admin/.htpasswd
-AuthGroupFile /private/var/www/ourBlog/Backend/protected/app/controllers/Admin/
-require user test
-require valid-user
-

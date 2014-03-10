@@ -29,7 +29,7 @@ class HomeController extends OurController
             $this->is_ajax[0] = $this->APP->isAjaxRequest;
             $this->is_ajax[1] = $_REQUEST['number'];
             $this->is_ajax[2] = 5; //the articles per request
-            $this->is_ajax[3] = $this->type->get_all_type();
+            $this->is_ajax[3] = $this->type->get_type_array();
         }
     }
 
