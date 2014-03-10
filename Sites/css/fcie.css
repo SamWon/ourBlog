@@ -1,0 +1,20 @@
+body {
+    *padding: 100px 0 0 100px;
+}
+
+p {
+    *margin-bottom: 100px;
+    *font-size: 40px;
+    *color: #ccc;
+}
+
+a, span {
+    *font-size: 30px;
+    *color: #ccc;
+}
+
+a {
+    *margin-left: 50px;
+    *text-decoration: underline;
+    *color: #fff;
+}
