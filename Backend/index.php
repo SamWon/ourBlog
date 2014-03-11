@@ -6,6 +6,7 @@
      *ALL THE PATHS HAVE NO SLASH TRAILLING
      *
      */
+//echo htmlspecialchars($str);exit;
 $domain = "http://www.our.com";
 $protected = "/protected";
 

@@ -26,7 +26,8 @@
                         <p class="textKind">分类:<?php echo $t_array[$a->tid];?></p>
 
                             <div class="textContent">
-<?php echo mb_substr($a->content,0,100,'utf-8')."......";?>
+
+<?php echo $a->content;?>
                             </div>
                         </div>
                     </div>

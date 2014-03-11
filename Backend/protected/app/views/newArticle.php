@@ -8,7 +8,11 @@
     <body>
         <div class="manage">管理：<a href="/index.php/admin/back/index">文章</a> | <a href="/index.php/admin/back/typeList">分类</a></div>
 
+<?php if(isset($article)):?>
+        <form method="post" action="/index.php/admin/back/addArticle/<?php echo $article[0]->aid;?>">
+<?php else:?>
         <form method="post" action="/index.php/admin/back/addArticle">
+<?php endif;?>
             <div>
                 <label for="">文章名称</label>
 <?php if(isset($article)):?>
@@ -23,7 +27,7 @@
                 <select name="type_id">
 <?php foreach($types as $t):?>
 <?php if($t->tid != 0):?>
-    <?php if(isset($article)):?>
+    <?php if(isset($article) && $article[0]->tid == $t->tid):?>
                     <option value="<?php echo $t->tid;?>" selected="selected"><?php echo $t->name;?></option>
     <?php else:?>
                     <option value="<?php echo $t->tid;?>"><?php echo $t->name;?></option>

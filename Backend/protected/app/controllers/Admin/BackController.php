@@ -40,7 +40,7 @@ class BackController extends OurController
             $this->data['article'] = $this->article->get_by_id($aid);
             $this->loadView('newArticle', $this->data);
         }else{
-            $this->loadView('newArticle');
+            $this->loadView('newArticle', $this->data);
         }
     }
 
@@ -113,7 +113,7 @@ class BackController extends OurController
         {
             $data = array(
                 'title'   =>trim(htmlspecialchars($_POST['title'])), 
-                'content' =>htmlspecialchars($_POST['content']),
+                'content' =>$_POST['content'],
                 'tid'     =>$_POST['type_id'],
                 'time'    =>date('Y-m-d')
             );
@@ -126,7 +126,7 @@ class BackController extends OurController
         }else{          //new
             $data = array(
                 'title'   =>trim(htmlspecialchars($_POST['title'])), 
-                'content' =>htmlspecialchars($_POST['content']),
+                'content' =>$_POST['content'],
                 'tid'     =>$_POST['type_id'],
                 'time'    =>date('Y-m-d')
             );
