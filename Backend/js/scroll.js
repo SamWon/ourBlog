@@ -41,6 +41,7 @@ $(document).ready(function() {
                             if(datas.result === "true") {
                                 var content = "",
                                     dataArray = datas.data;
+
                                 for(var i = 0; i < datas.data.length; i++) {
                                     var nowMonth = dataArray[i].time.split("-");
                                     content += '<div class="articleBlock">' +
@@ -63,6 +64,11 @@ $(document).ready(function() {
                                 $(content).insertBefore($load);
                                 onload = 0;
                                 number++;
+
+                                if(datas.data.length < 5) {
+                                    $load.html("请期待更多的精彩...");
+                                    onload = 1;
+                                }
                             } else {
                                 $load.html("请期待更多的精彩...");
                                 onload = 1;
