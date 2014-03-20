@@ -2,9 +2,9 @@
 
 require_once(CORE_PATH. '/utils/URLParser.php');
 require_once(CORE_PATH. '/utils/DB.php');
-require_once(CORE_PATH. '/ourController.php');
-require_once(CORE_PATH. '/ourModel.php');
-require_once(CORE_PATH. '/ourException.php');
+require_once(CORE_PATH. '/OurController.php');
+require_once(CORE_PATH. '/OurModel.php');
+require_once(CORE_PATH. '/OurException.php');
 //require_once(CORE_PATH. '/LogModel.php');  //???这里可以在common.php里弄一个load_class()
 
 
