@@ -20,6 +20,7 @@ class OurController
     //实际上也就是检查路径对不对，然后extract数组，包含view文件
     public function loadView($viewName, $dataArray = array())
     {
+        $viewName = strtolower( $viewName );
         $viewPath = APP_PATH. '/views/' .$viewName. '.php';
 
         if(empty($viewName) || !file_exists($viewPath))

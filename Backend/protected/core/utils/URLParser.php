@@ -20,7 +20,7 @@ class URLParser
     {
         //将uri中的class & method 抽丝剥茧出来
         $apart = '/';
-        $this->className = strtok( $this->uri, $apart );
+        $this->className = ucfirst(strtok( $this->uri, $apart ));
         //加上可能有目录的情况
         $tmpName = $this->className;
         $is_dir =APP_PATH."/controllers/".$this->className;

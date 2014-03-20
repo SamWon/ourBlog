@@ -51,7 +51,8 @@ class OurModel
         }
 
         $sql = "insert into {$table_name}({$field}) values({$value})";//字符串插入加引号 
-        $result = $this->db->query($sql);
+        //$result = $this->db->query($sql);
+        $result = mysql_query( $sql );
         return $result;
         
     }
@@ -70,7 +71,8 @@ class OurModel
         }
 
         $sql = "delete from {$table_name} where {$field} = {$value}";
-        $result = $this->db->query($sql);
+        //$result = $this->db->query($sql);
+        $result = mysql_query( $sql );
         return $result;
          
     }
@@ -87,7 +89,8 @@ class OurModel
         else
             die("Params error.");
 
-        $result = $this->db->query($sql);
+       // $result = $this->db->query($sql);
+        $result = mysql_query( $sql );
         return $this->make_result($result);
     }
 
@@ -109,7 +112,8 @@ class OurModel
             $sql = "select * from {$table_name} where {$field}={$value}";
         else
             die("Params error.");
-        $result = $this->db->query($sql);
+        //$result = $this->db->query($sql);
+        $result = mysql_query( $sql );
         return $this->make_result($result);
     }
 
@@ -142,7 +146,8 @@ class OurModel
         }
 
         $sql = "update {$table_name} set {$data_str} where {$info_f}={$info_v}";
-        $result =  $this->db->query($sql);
+        //$result =  $this->db->query($sql);
+        $result = mysql_query( $sql );
         return $result;
     }
 
@@ -157,14 +162,16 @@ class OurModel
             //$sql = "select * from {$table_name} where {$field}={$value}";
         else
             die("Params error.");
-        $result =  $this->db->query($sql);
+        //$result =  $this->db->query($sql);
+        $result = mysql_query( $sql );
         return $this->make_result($result);
     }
 
     /*工具函数：生成结果数组*/
     public function make_result($result)
     {
-        while($row = $result->fetch_object())                
+        //while($row = $result->fetch_object())                
+        while( $row = mysql_fetch_object( $result ))
             $data_array[] = $row;
         return $data_array;
     }
@@ -185,7 +192,9 @@ class OurModel
         }else{
             $sql = "select * from {$table_name}";
         }
-        $result = $this->db->query($sql);
-        return $result->num_rows;
+        //$result = $this->db->query($sql);
+        $result = mysql_query( $sql );
+        //return $result->num_rows;
+        return mysql_num_rows( $result );
     }
 }

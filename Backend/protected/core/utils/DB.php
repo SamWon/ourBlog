@@ -25,16 +25,24 @@ class DB
     /*连接数据库*/
     public function connectDB()
     {
-        $this->db = new mysqli($this->hostname, $this->username, $this->password, $this->database);
-        if($this->db->connect_errno)
-            die("Connected failed: ". $this->db->connect_error);
+        //$this->db = new mysqli($this->hostname, $this->username, $this->password, $this->database);
+        $this->db = mysql_connect( $this->hostname, $this->username, $this->password );
+        if( !$this->db )
+        {
+            die("Could not connect:" . mysql_error());
+        }
+        mysql_query("SET NAMES utf8 ");
+        mysql_select_db($this->database, $this->db);
+        //if($this->db->connect_errno)
+            //die("Connected failed: ". $this->db->connect_error);
         return $this->db;
     }
 
     /* 关闭数据库连接 */ 
     public function closeDB()
     {
-        $this->db->close();
+        //$this->db->close();
+        mysql_close( $this->db );
     }
     
     /*返回类的实例 */
