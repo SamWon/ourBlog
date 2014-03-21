@@ -144,13 +144,16 @@ class ArticleModel extends OurModel
     private function _find_img( $content )
     {
             //preg_match('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i',$content,$match);
-            foreach($content as $c)
+            if($content )
             {
-                if($tmp = preg_match('/<img \s*[^>]*>/i',substr($c->content,0,200), $match))
+                foreach($content as $c)
                 {
-                    //$c->img = $match[0];
-                    $tmp    = preg_replace('/<img \s*[^>]*>/i', '', $c->content );   
-                    $c->content = $match[0] . $this->_cutstr($tmp, 100, 'utf-8', "......");   //将img的标签放在内容里
+                    if($tmp = preg_match('/<img \s*[^>]*>/i',substr($c->content,0,200), $match))
+                    {
+                        //$c->img = $match[0];
+                        $tmp    = preg_replace('/<img \s*[^>]*>/i', '', $c->content );   
+                        $c->content = $match[0] . $this->_cutstr($tmp, 100, 'utf-8', "......");   //将img的标签放在内容里
+                    }
                 }
             }
             
