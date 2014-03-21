@@ -18,6 +18,7 @@ class BackController extends OurController
     
     public function index()
     {
+        //var_dump(date("Y-m-d H:i:s"));exit;
         $this->data['articles'] = $this->article->get_all_article(array(),1);
         $this->data['t_array'] = $this->type->get_type_array();//get type from id
         $this->loadview('articlelist',$this->data);
@@ -115,7 +116,7 @@ class BackController extends OurController
                 'title'   =>trim(htmlspecialchars($_POST['title'])), 
                 'content' =>$_POST['content'],
                 'tid'     =>$_POST['type_id'],
-                'time'    =>date('Y-m-d')
+                'time'    =>date('Y-m-d H:i:s')
             );
             if($data['title'] === "")
                 $this->warning("好歹输入个标题吧=。=");
@@ -128,7 +129,7 @@ class BackController extends OurController
                 'title'   =>trim(htmlspecialchars($_POST['title'])), 
                 'content' =>$_POST['content'],
                 'tid'     =>$_POST['type_id'],
-                'time'    =>date('Y-m-d')
+                'time'    =>date('Y-m-d H:i:s')
             );
             if($data['title'] === "")
                 $this->warning("好歹输入个标题吧=。=");

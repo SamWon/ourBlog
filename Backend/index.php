@@ -7,6 +7,7 @@
      *
      */
 //echo htmlspecialchars($str);exit;
+date_default_timezone_set("Asia/Shanghai");
 $domain = "http://www.our.com";
 $protected = "/protected";
 
