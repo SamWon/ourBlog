@@ -83,7 +83,7 @@ class OurModel
         if(empty($table_name))
             die("Please input the tablename");
         if(!($offset === "") && !empty($lines))
-            $sql = "select * from {$table_name} limit {$offset},{$lines}";
+            $sql = "select * from {$table_name} order by time DESC limit {$offset},{$lines}";
         elseif(empty($offset)&& empty($lines))
             $sql = "select * from {$table_name}";
         else
@@ -107,7 +107,7 @@ class OurModel
             $value = $v;
         }
         if(!($offset === "") && !empty($lines))
-            $sql = "select * from {$table_name} where {$field}={$value} limit {$offset},{$lines} ";
+            $sql = "select * from {$table_name} where {$field}={$value}  order by time DESC limit {$offset},{$lines} ";
         elseif(empty($offset)  && empty($lines) )
             $sql = "select * from {$table_name} where {$field}={$value}";
         else
@@ -155,7 +155,7 @@ class OurModel
     {
         //$sql = "SELECT * FROM {$table_name} WHERE UPPER(title) LIKE BINARY CONCAT('%',UPPER({$key}),'%') OR UPPER(content) LIKE BINARY CONCAT('%',UPPER({$key}),'%')";
         if(!($offset === "") && !empty($lines))
-            $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%' limit {$offset},{$lines}";
+            $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%' order by time desc limit {$offset},{$lines}";
             //$sql = "select * from {$table_name} where {$field}={$value} limit {$offset},{$lines} ";
         elseif(empty($offset)  && empty($lines) )
             $sql = "select * from {$table_name} where title like  '%{$key}%' or content like '%{$key}%'";
